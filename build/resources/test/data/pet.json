@@ -1,0 +1,18 @@
+{
+  "id": 1123,
+  "category": {
+    "id": 1,
+    "name": "dog"
+  },
+  "name": "Teste1",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "Animal vermifugado na primeira semana"
+    }
+  ],
+  "status": "available"
+}
