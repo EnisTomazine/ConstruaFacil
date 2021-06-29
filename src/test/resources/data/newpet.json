@@ -10,9 +10,13 @@
   ],
   "tags": [
     {
-      "id": 0,
+      "id": 3,
       "name": "Animal vermifugado na primeira semana"
+    },
+    {
+      "id": 4,
+      "name": "Vacinado na segunda semana"
     }
   ],
-  "status": "available"
+  "status": "sold"
 }
