@@ -8,13 +8,11 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-//oi
+
 dependencies {
-    //oi
     testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.3'
-
-
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 }
 
 test{
