@@ -6,3 +6,5 @@ apiTests/Pet.java
  apiTests.Pet
 webTests/seleniumSimples.java
  webTests.seleniumSimples
+webTests/seleniumIDE.java
+ webTests.seleniumIDE
