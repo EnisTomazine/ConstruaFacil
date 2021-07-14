@@ -1,10 +1,14 @@
 unitTests/TestaCalc.java
  unitTests.TestaCalc
-apiTests/User.java
- apiTests.User
-apiTests/Pet.java
- apiTests.Pet
 webTests/seleniumSimples.java
  webTests.seleniumSimples
 webTests/seleniumIDE.java
  webTests.seleniumIDE
+apiTests/User.java
+ apiTests.User
+utils/Evidencias.java
+ utils.Evidencias
+apiTests/Pet.java
+ apiTests.Pet
+apiTests/Order.java
+ apiTests.Order
