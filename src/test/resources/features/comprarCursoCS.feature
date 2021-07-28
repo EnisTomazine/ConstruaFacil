@@ -1,10 +1,30 @@
 #language: pt
 Funcionalidade: Comprar Curso CS
 
-  Cenario: Pesquisar e Curso e Incluir no Carrinho
+  Cenario: Pesquisar e Curso com Clique e Incluir no Carrinho
     Dado que acesso o site da Iterasys
     Quando pesquiso por "Mantis"
     E clico na Lupa
     Entao vejo a lista de resultados para o curso "Mantis"
     Quando clico em Matricule-se
     Entao confirmo o nome do curso como "Mantis" e o preco de "R$ 49,99"
+
+  Cenario: Pesquisar e Curso com Enter e Incluir no Carrinho
+    Dado que acesso o site da Iterasys
+    Quando pesquiso por "Mantis"
+    E pressiono Enter
+    Entao vejo a lista de resultados para o curso "Mantis"
+    Quando clico em Matricule-se
+    Entao confirmo o nome do curso como "Mantis" e o preco de "R$ 49,99"
+
+  Esquema do Cenario: Pesquisar e Curso com Enter e Incluir no Carrinho EC
+    Dado que acesso o site da Iterasys
+    Quando pesquiso por <curso>
+    E pressiono Enter
+    Entao vejo a lista de resultados para o curso <curso>
+    Quando clico em Matricule-se
+    Entao confirmo o nome do curso como <curso> e o preco de <preco>
+    Exemplos:
+      | curso                   | preco       |
+      | "Mantis"                | "R$ 49,99"  |
+      | "Preparatório CTFL"     | "R$ 169,00" |

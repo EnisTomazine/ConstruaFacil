@@ -9,7 +9,10 @@ import cucumber.api.java.pt.Quando;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,13 +20,14 @@ import static org.testng.Assert.assertEquals;
 
 public class comprarCursoCS {
     WebDriver driver;
-
+    WebDriverWait wait;
     @Before
     public void iniciar(){
-        System.setProperty("webdriver.chrome.driver", "drivers/chrome/91/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "drivers/chrome/92/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(60000, TimeUnit.MILLISECONDS);
+        //driver.manage().timeouts().implicitlyWait(120000, TimeUnit.MILLISECONDS);
         driver.manage().window().maximize(); // Maximizar a janela
+        wait = new WebDriverWait(driver, 60);
 
         System.out.println("0 - Antes do Teste iniciar");
     }
@@ -57,6 +61,9 @@ public class comprarCursoCS {
 
     @Entao("^vejo a lista de resultados para o curso \"([^\"]*)\"$")
     public void vejoAListaDeResultadosParaOCurso(String curso)  {
+        String textoEsperado = "Cursos › \"" + curso + "\"";
+        WebElement h3Texto = driver.findElement(By.cssSelector("h3"));
+                wait.until(ExpectedConditions.textToBePresentInElement(h3Texto,textoEsperado));
         assertEquals(driver.findElement(By.cssSelector("h3")).getText(),"Cursos › \"" + curso + "\"");
         System.out.println("4 - Exibiu a lista de resultados para o curso " + curso);
     }
@@ -73,5 +80,11 @@ public class comprarCursoCS {
         assertEquals(driver.findElement(By.cssSelector("span.new-price")).getText(), preco);
         System.out.println("6 - Confirmou o nome como " + curso + " e o preco do curso como " + preco);
 
+    }
+
+    @E("^pressiono Enter$")
+    public void pressionoEnter() {
+        driver.findElement(By.id("searchtext")).sendKeys(Keys.ENTER);
+        System.out.println("3a - Preossionou Enter");
     }
 }
