@@ -11,6 +11,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,9 +26,9 @@ public class comprarCursoCS {
     public void iniciar(){
         System.setProperty("webdriver.chrome.driver", "drivers/chrome/92/chromedriver.exe");
         driver = new ChromeDriver();
-        //driver.manage().timeouts().implicitlyWait(120000, TimeUnit.MILLISECONDS);
+        //driver.manage().timeouts().implicitlyWait(60000, TimeUnit.MILLISECONDS);
         driver.manage().window().maximize(); // Maximizar a janela
-        wait = new WebDriverWait(driver, 60);
+        wait = new WebDriverWait(driver, 10  , 1);
 
         System.out.println("0 - Antes do Teste iniciar");
     }
@@ -62,8 +63,11 @@ public class comprarCursoCS {
     @Entao("^vejo a lista de resultados para o curso \"([^\"]*)\"$")
     public void vejoAListaDeResultadosParaOCurso(String curso)  {
         String textoEsperado = "Cursos › \"" + curso + "\"";
-        WebElement h3Texto = driver.findElement(By.cssSelector("h3"));
-                wait.until(ExpectedConditions.textToBePresentInElement(h3Texto,textoEsperado));
+        //WebElement h3Texto = driver.findElement(By.cssSelector("h3"));
+        //        wait.until(ExpectedConditions.textToBePresentInElement(h3Texto,textoEsperado));
+
+        //esperar que o elemento tenha o texto desejado
+        wait.until(ExpectedConditions.textToBe(By.cssSelector("h3"), textoEsperado));
         assertEquals(driver.findElement(By.cssSelector("h3")).getText(),"Cursos › \"" + curso + "\"");
         System.out.println("4 - Exibiu a lista de resultados para o curso " + curso);
     }
@@ -76,6 +80,7 @@ public class comprarCursoCS {
 
     @Entao("^confirmo o nome do curso como \"([^\"]*)\" e o preco de \"([^\"]*)\"$")
     public void confirmoONomeDoCursoComoEOPrecoDe(String curso, String preco)  {
+        wait.until(ExpectedConditions.textToBe(By.cssSelector("span.item-title"), curso));
         assertEquals(driver.findElement(By.cssSelector("span.item-title")).getText(), curso);
         assertEquals(driver.findElement(By.cssSelector("span.new-price")).getText(), preco);
         System.out.println("6 - Confirmou o nome como " + curso + " e o preco do curso como " + preco);
@@ -86,5 +91,29 @@ public class comprarCursoCS {
     public void pressionoEnter() {
         driver.findElement(By.id("searchtext")).sendKeys(Keys.ENTER);
         System.out.println("3a - Preossionou Enter");
+    }
+
+    @Quando("^clico na imagem de um curso$")
+    public void clicoNaImagemDeUmCurso() {
+        //driver.findElement(By.cssSelector("span.mais")).click();
+        WebElement ele = driver.findElement(By.xpath("/html[1]/body[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/a[1]"));
+        Actions action = new Actions(driver);
+        action.moveToElement(ele).perform();
+        driver.findElement(By.xpath("/html[1]/body[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/a[1]/span[1]/span[1]")).click();
+        System.out.println("Clico na imagem do curso");
+    }
+
+    @Entao("^vejo a pagina com detalhes do curso$")
+    public void vejoAPaginaComDetalhesDoCurso() {
+        wait.until(ExpectedConditions.titleIs("Mantis - Iterasys"));
+        assertEquals(driver.getTitle(),"Mantis - Iterasys");
+        System.out.println("Vejo a pagina de detalhes");
+    }
+
+    @E("^clico no botao Ok do popup da LGPD$")
+    public void clicoNoBotaoOkDoPopupDaLGPD() {
+        driver.findElement(By.cssSelector("a.cc-btn.cc-dismiss")).click();
+        System.out.println("Clico no botao Ok do popup da LGPD");
+
     }
 }

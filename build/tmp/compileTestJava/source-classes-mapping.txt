@@ -16,3 +16,7 @@ apiTests/Order.java
  apiTests.Order
 webTests/comprarCursoCS.java
  webTests.comprarCursoCS
+stepsPO/comprarCursoPO.java
+ stepsPO.comprarCursoPO
+stepsPO/Hooks.java
+ stepsPO.Hooks
